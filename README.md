@@ -2,7 +2,8 @@
 
 This repository contains project page source code for paper: Guiding Long-Horizon Task and Motion Planning with Vision Language Models.
 
-Since the page loads html snippets of VLM conversations,
+Since the page loads html snippets of VLM conversations, run the following and view from localhost:
+
 ```
 python3 -m http.server
 ```
