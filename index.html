@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Guiding Long-Horizon Task and Motion Planning with Vision Language Models">
+  <meta name="keywords" content="VLM, Task and Motion Planning, Manipulation Planning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VLM-TAMP</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/chat.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<section class="hero" style="background-color: #ffffff; z-index:-10">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Guiding Long-Horizon Task and Motion Planning <br> with Vision Language Models</h1>
+          <h3 class="title is-4 conference-authors">
+            In Submission
+          </h3>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero" style="background-color: #ffffff; z-index:-10; margin-top: -2rem">
+  <div class="container">
+    <div class="hero-body">
+
+      <div class="video-teaser">
+        <video poster="" autoplay muted width="70%" controls>
+          <source src="media/videos/teaser.mp4" type="video/mp4">
+        </video>
+      </div>
+
+       <div class="container" style="padding-top:2rem; padding-bottom:1.5rem">
+         <h2 class="subtitle has-text-centered">
+         VLM-TAMP is a general method for solving long-horizon manipulation planning problems, <br> combining the strengths and overcome the limitations of Task and Motion Planning & Vision Language Models.</b>
+         </h2>
+       </div>
+
+      <img src="media/figures/overview.png" class="full-image" style="width:75%;"
+         alt="VLM-TAMP" />
+
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light" style="z-index:-10">
+  <div class="container">
+    <div class="hero-body">
+
+       <div class="container" style="margin-bottom:-1rem">
+         <h2 class="subtitle has-text-centered">
+         Vision-Language Models (VLM) can generate plausible high-level plans. <br>However, there is no guarantee that the actions predicted and grounded by VLM/LLMs <br> are <b>geometrically and kinematically feasible</b> for a <b>particular robot embodiment.</b>
+         </h2>
+         <h2 class="subtitle has-text-centered">
+         For example, when the VLM predicted step is "Place the cabbage in the pot," <br>the shortest plan for the following three robot embodiments are different:</b>
+         </h2>
+       </div>
+
+    </div>
+  </div>
+
+
+  <table class='video-table' style="margin-bottom:4rem">
+    <tr>
+      <th>Embodiment</th>
+      <th>Dual-Arm Rummy (Long Arms)</th>
+      <th>Dual-Arm PR2 (Shorter Arms)</th>
+      <th>Single-Arm PR2</th>
+    </tr>
+    <tr style="font-family: monospace;">
+      <td>Plans</td>
+      <td>
+        pick(left-arm, cabbage)<br>
+        place(left-arm, cabbage, pot)
+      </td>
+      <td>
+        pick(left-arm, cabbage)<br>
+        push-handle(right-arm, cabbage-drawer)<br>
+        place(left-arm, cabbage, pot)
+      </td>
+      <td>
+        pick(left-arm, cabbage)<br>
+        place(left-arm, cabbage, counter)<br>
+        pick(left-arm, cabbage)<br>
+        place(left-arm, cabbage, pot)
+      </td>
+    </tr>
+    <tr style="max-height: 300px;">
+      <td>Trajectories</td>
+      <td>
+        <video class="video-embodiment" poster="" autoplay muted height="100%" controls>
+          <source src="media/videos/embodiment_rummy_1.mp4" type="video/mp4">
+        </video>
+      </td>
+
+      <td>
+        <video class="video-embodiment" poster="" autoplay muted height="100%" controls>
+          <source src="media/videos/embodiment_pr2_dual_arm_1.mp4" type="video/mp4">
+        </video>
+      </td>
+
+      <td>
+        <video class="video-embodiment" poster="" autoplay muted height="100%" controls > <!-- playbackRate=2 -->
+          <source src="media/videos/embodiment_pr2_single_arm_1.mp4" type="video/mp4">
+        </video>
+      </td>
+    </tr>
+  </table>
+</section>
+
+
+<section class="hero" style="z-index:-10">
+  <div class="container">
+    <div class="hero-body" style="padding-bottom: 0em;">
+
+       <div class="container">
+         <h2 class="subtitle has-text-centered">
+        We propose <b>VLM-TAMP</b>, a hierarchical planning algorithm that leverages a <span class="text-vlm">VLM</span> to generate <br>both semantically-meaningful and horizon-reducing subgoals that guide a <span class="text-tamp">task and motion planner</span>. <br>When a subgoal cannot be refined, the VLM is <span class="text-reprompt">queried again for replanning</span>.  
+         </h2>
+       </div>
+
+      <img src="media/figures/approach.png" class="full-image" style="width:75%; padding-top: 0.5em;"
+         alt="VLM-TAMP" />
+
+    </div>
+  </div>
+
+
+  <div class="chat-body">
+        <div class="chat-container">
+          <div class="sidebar">
+            <div class="menu">Examples</div>
+            <div class="problem-sections">
+              <div class="problem-section" data-content="problem1">
+                Make Chicken Soup <br><span class="sidenote">(with TAMP solutions and reprompting)</span>
+              </div>
+            </div>
+          </div>
+          <div class="chat-window">
+            <div class="chat-header">
+
+              <span>
+                VLM:
+                <select id="model-select">
+                  <option value="modelA">gpt-4o-mini</option>
+                </select>
+              </span>
+
+              <span>
+                Query Mode:
+                <select id="mode-select">
+                  <option value="modeA">Subgoals</option>
+                  <option value="modeB">Actions</option>
+                </select>
+              </span>
+
+              <span>
+                Robot:
+                <select id="robot-select">
+                  <option value="robotA">Dual-Arm PR2</option>
+                  <option value="robotB">Single-Arm PR2</option>
+                </select>
+              </span>
+              
+              <span>
+                Init:
+                <select id="env-select">
+                  <option value="envA">Open Spaces</option>
+                  <option value="envB">More Obstacles</option>
+                </select>
+              </span>
+              
+            </div>
+            <div class="chat-content" id="chat-content">
+              <!-- Chat content will be loaded dynamically here -->
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
+
+
+<section class="hero is-light" style="z-index:-10">
+  <div class="container">
+    <div class="hero-body" style="padding-bottom: 2em;">
+
+       <div class="container">
+         <h2 class="subtitle has-text-centered">
+         We evaluate VLM-TAMP on kitchen tasks where a robot must accomplish cooking goals<br> that require performing 30-50 actions in sequence and interacting with up to 21 objects.
+         </h2>
+       </div>
+
+    </div>
+  </div>
+</section>
+
+
+<section class="hero" style="z-index:-10">
+  <div class="container">
+    <div class="hero-body" style="padding-bottom: 2em;">
+
+       <div class="container">
+
+         <h2 class="subtitle has-text-centered">
+         <span class="text-vlm">VLM-TAMP</span> substantially outperforms <span class="text-baselines">baselines</span> that rigidly and independently execute VLM-generated action sequences,  <br> both in terms of success rates (50 to 100% versus 0%) and average task completion percentage (72 to 100% versus 15 to 45%). 
+         </h2>
+
+          <img src="media/figures/result_1.png" class="full-image" style="width:65%; padding-top: 0.5em;padding-bottom: 2em;" alt="result_1" />
+
+         <h2 class="subtitle has-text-centered">
+         Reprompting VLM visibly benefit <span class="text-vlm">VLM-TAMP</span>, increasing task success increasing by 47 to 55% on the harder problems,<br> while it doesn't help the <span class="text-baselines">baseline</span> which predicts actions
+         </h2>
+
+          <img src="media/figures/result_2.png" class="full-image" style="width:65%; padding-top: 0.5em;" alt="result_2" />
+
+       </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="content has-text-centered">
+          <p>
+            Website template borrowed from <a href="https://github.com/nerfies/nerfies.github.io">NeRFies</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- <script>
+includeHTML();
+</script> -->
+
+<script src="./static/js/chat.js"></script>
+</body>
+</html>
